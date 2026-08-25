@@ -32,3 +32,51 @@ text = re.sub(r"[^\w\s]", "", text)
 
 import re
 words = re.findall(r"\b\w+\b", text.lower())
+
+
+
+import json
+import os
+
+
+class DocumentLoader:
+
+    def load(self, filename):
+
+        # Get file extension
+        _, extension = os.path.splitext(filename)
+        extension = extension.lower()
+
+        # Read file based on type
+        if extension == ".txt":
+
+            with open(filename, "r", encoding="utf-8") as file:
+                text = file.read()
+
+        elif extension == ".json":
+
+            with open(filename, "r", encoding="utf-8") as file:
+                data = json.load(file)
+
+            # Convert JSON data to text
+            text = json.dumps(data)
+
+        else:
+            raise ValueError(
+                f"Unsupported file type: {extension}"
+            )
+
+        # Preprocess / normalize text
+        text = " ".join(text.split())
+
+        # Create standardized document
+        document = {
+            "text": text,
+            "metadata": {
+                "filename": os.path.basename(filename),
+                "extension": extension,
+                "size": os.path.getsize(filename)
+            }
+        }
+
+        return document
