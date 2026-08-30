@@ -21,3 +21,5 @@ requests
 sentence-transformers
 transformers
 torch
+
+streamlit
