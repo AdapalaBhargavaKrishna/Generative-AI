@@ -1,0 +1,5 @@
+helo how are you
+
+iam learning rag which is retrieval augumented generation
+
+what about you
