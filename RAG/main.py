@@ -6,16 +6,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
 
-data = PyPDFLoader('RAG/document loaders/deepLearning.pdf')
-docs = data.load()
-
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 1000,
-    chunk_overlap = 200
-)
-
-chunks = splitter.split_documents(docs)
-
 template = ChatPromptTemplate.from_messages(
     [('system' , 'you are a AI that summarises the text'),
      ('human' , '{data}')]
@@ -24,8 +14,3 @@ template = ChatPromptTemplate.from_messages(
 model = init_chat_model(
     'mistralai:mistral-small-latest'
 )
-
-prompt = template.format_messages(data = docs)
-
-result = model.invoke(prompt)
-print(result.content)
