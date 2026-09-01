@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_mistralai import MistralAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from dotenv import load_dotenv
 
@@ -16,7 +16,7 @@ splitter = RecursiveCharacterTextSplitter(
 
 chunks = splitter.split_documents(docs)
 
-embedding_model = MistralAIEmbeddings(model="mistral-embed")
+embedding_model = HuggingFaceEmbeddings()
 
 vectorstore = Chroma.from_documents(
     documents=chunks,
