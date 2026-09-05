@@ -26,3 +26,5 @@ transformers
 torch
 
 streamlit
+
+tavily
